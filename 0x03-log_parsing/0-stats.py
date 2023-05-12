@@ -1,40 +1,42 @@
+"""Manipulating systin """
 #!/usr/bin/python3
-"""
-Reading from system input
-"""
-import re
 import sys
+codes_list = {
+            '200': 0, '301': 0, '400': 0, '401': 0,
+            '403': 0, '404': 0, '405': 0, '500': 0
+            }
 
-
-number_of_staus = {}
-possible_staus = ['200', '301', '400', '401', '403', '404', '405', '500']
 total_size = 0
 count = 0
-pattern = re.compile(
-    r'^\d+\.\d+\.\d+\.\d+ - \[.+\] "GET /pro\w+/260 HTTP/1.1" (\d+) (\d+)$'
-    )
+
 try:
     for line in sys.stdin:
-        result = pattern.search(line)
-        if result:
-            status = result.group(1)
-            size = result.group(2)
-            if status in possible_staus:
-                if status in number_of_staus.keys():
-                    number_of_staus[status] += 1
-                else:
-                    number_of_staus[status] = 1
-            total_size += int(size)
+        lines = line.split(" ")
+
+        if len(lines) > 4:
+            status = lines[-2]
+            size = int(lines[-1])
+
+            if status in codes_list.keys():
+                codes_list[status] += 1
+
+            total_size += size
+
             count += 1
-            if count % 10 == 0:
-                print("File Size: {}".format(total_size))
-                for key in possible_staus:
-                    if key in number_of_staus.keys():
-                        print("{}: {}".format(key, number_of_staus[key]))
-except Exception:
+
+        if count == 10:
+            count = 0
+            print('File size: {}'.format(total_size))
+
+            for key, value in sorted(codes_list.items()):
+                if value != 0:
+                    print('{}: {}'.format(key, value))
+
+except Exception as err:
     pass
+
 finally:
-    print("File Size: {}".format(total_size))
-    for key in possible_staus:
-        if key in number_of_staus.keys():
-            print("{}: {}".format(key, number_of_staus[key]))
+    print('File size: {}'.format(total_size))
+    for key, value in sorted(codes_list.items()):
+        if value != 0:
+            print('{}: {}'.format(key, value))
