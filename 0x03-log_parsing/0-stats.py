@@ -31,7 +31,9 @@ if __name__ == '__main__':
                     for key in possible_staus:
                         if key in number_of_staus.keys():
                             print("{}: {}".format(key, number_of_staus[key]))
-    except KeyboardInterrupt as e:
+    except Exception:
+        pass
+    finally:
         print("File Size: {}".format(total_size))
         for key in possible_staus:
             if key in number_of_staus.keys():
