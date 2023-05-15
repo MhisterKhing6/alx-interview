@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Creates a function for the open boxes 
+Creates a function for the open boxes
 """
 
 
