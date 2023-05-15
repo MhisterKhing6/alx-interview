@@ -2,10 +2,9 @@
 """
 Generating Finobacci numbers
 """
-from typing import List
 
 
-def pascal_triangle(n: int) -> List:
+def pascal_triangle(n):
     """
     pascal_triangle- : Get the pascal integers of a number
     n : the number of numbers
