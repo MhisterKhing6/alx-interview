@@ -13,7 +13,7 @@ def pascal_triangle(n):
     if n <= 0:
         return []
     container = [[1]]
-    for j in range(n):
+    for j in range(n-1):
         new = []
         for i in range(len(container[j])):
             if i == 0:  # if it is first elemet just add it
