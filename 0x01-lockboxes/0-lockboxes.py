@@ -1,21 +1,22 @@
 #!/usr/bin/python3
 """
-Creates a function for the open boxes
+This modeule supplies the function `canUnlockAll` which
+analyses a list of lockboxes
 """
 
 
-def canUnlockAll(containrs):
+def canUnlockAll(boxes):
     """
-    Checks if all boxes are open
+    This function checks and unlocks other locked boxes
     """
-    if not containrs or type(containrs) is not list:
+    if not boxes or type(boxes) is not list:
         return False
 
-    opened_box = [0]
-    for n in opened_box:
-        for key in containrs[n]:
-            if key not in opened_box and key < len(containrs):
-                opened_box.append(key)
-    if len(opened_box) == len(containrs):
+    unlocked = [0]
+    for n in unlocked:
+        for key in boxes[n]:
+            if key not in unlocked and key < len(boxes):
+                unlocked.append(key)
+    if len(unlocked) == len(boxes):
         return True
     return False

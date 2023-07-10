@@ -1,25 +1,26 @@
 #!/usr/bin/python3
 """
-Generating Finobacci numbers
+This is a module used to provides the pascal triangle function.
 """
 
 
 def pascal_triangle(n):
     """
-    pascal_triangle- : Get the pascal integers of a number
-    n : the number of numbers
-    returns : List[List[int]] of the number
+    This function returns a list of lists of integers
+    representing the Pascal’s triangle of n.
     """
-    if n <= 0:
-        return []
-    container = [[1]]
-    for j in range(n-1):
-        new = []
-        for i in range(len(container[j])):
-            if i == 0:  # if it is first elemet just add it
-                new.append(container[j][i])
-            else:
-                new.append(container[j][i] + container[j][i-1])
-        new.append(container[j][len(container[j]) - 1])   # add the las element
-        container.append(new)
-    return container
+
+    subList = [1]
+    result = []
+    while n > 0:
+        result.append(subList)
+        helperList = subList.copy()
+        prevNum = 0
+        subList = []
+        for nextNum in helperList:
+            subList.append(prevNum + nextNum)
+            prevNum = nextNum
+        subList.append(1)
+        n -= 1
+
+    return result

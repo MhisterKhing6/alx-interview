@@ -1,2 +1,1 @@
-Log passing project Alx
-Writing the pascal triagle algorithm
+0x03-log_parsing
